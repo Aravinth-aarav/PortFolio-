@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ARAVINTHASAMY C - Portfolio</title>
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <style>
+      /* General Styling */
+      :root {
+        --primary-color: #007bff;
+        --secondary-color: #00d4ff;
+        --dark-color: #000428;
+        --light-color: #f8f9fa;
+        --text-color: #333;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        overflow-x: hidden;
+        background-color: var(--light-color);
+      }
+
+      .container {
+        max-width: 1140px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Navigation Bar */
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(0, 4, 40, 0.9);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        padding: 1rem 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      .navbar.scrolled {
+        background: rgba(0, 4, 40, 0.98);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+      }
+
+      .navbar-brand {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #fff;
+        text-decoration: none;
+      }
+
+      .navbar-nav {
+        display: flex;
+        list-style: none;
+      }
+
+      .nav-link {
+        color: #fff;
+        transition: all 0.3s ease;
+        position: relative;
+        margin: 0 20px;
+        text-decoration: none;
+        padding: 5px 0;
+        font-size: 1.2rem;
+        font-weight: 500;
+      }
+
+      .nav-link:hover {
+        color: var(--secondary-color);
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(
+          45deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
+
+      .navbar-toggler {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 1001;
+      }
+
+      .navbar-toggler-icon {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: white;
+        margin: 5px 0;
+        transition: all 0.3s ease;
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+        padding: 100px 0 50px;
+      }
+
+      .hero-content {
+        z-index: 2;
+        max-width: 1000px;
+        padding: 3.5rem;
+      }
+
+      .profile-img {
+        width: 350px;
+        height: 350px;
+        border-radius: 50%;
+        border: 5px solid rgba(255, 255, 255, 0.3);
+        object-fit: cover;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        margin-bottom: 1.5rem;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        animation: slideInLeft 1s ease-out;
+      }
+
+      .video-container {
+        margin: 2rem auto;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        max-width: 800px;
+        width: 90%;
+        background-color: #000;
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        height: 0;
+        transition: all 0.3s ease;
+      }
+
+      .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .video-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+      }
+
+      .video-note {
+        margin-top: 1rem;
+        color: white;
+        padding: 8px;
+        text-align: center;
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+
+      /* Responsive video container for smaller screens */
+      @media (max-width: 768px) {
+        .video-container {
+          width: 95%;
+          margin: 1.5rem auto;
+        }
+      }
+      .hero .subtitle {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+        animation: slideInRight 1s ease-out;
+        min-height: 2.6rem; /* Reserve space for typing effect */
+      }
+
+      .cta-buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .btn {
+        padding: 12px 30px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 2px solid transparent;
+      }
+
+      .btn-primary {
+        background: linear-gradient(
+          45deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        color: white;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(0, 123, 255, 0.4);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: white;
+        border-color: rgba(255, 255, 255, 0.5);
+      }
+
+      .btn-outline:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-3px);
+      }
+
+      /* General Section Styles */
+      .section {
+        padding: 80px 0;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 4rem;
+        color: var(--text-color);
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(
+          45deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 2px;
+      }
+
+      /* Bio Section */
+      .bio-info {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        font-size: 1.1rem;
+        text-align: left;
+      }
+
+      .info-title {
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+        color: var(--dark-color);
+      }
+
+      .contact-details {
+        list-style: none;
+        margin: 1.5rem 0;
+        padding: 0;
+      }
+
+      .contact-details li {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+        gap: 1rem;
+      }
+
+      .contact-details i {
+        color: var(--primary-color);
+        width: 20px;
+        font-size: 1.2rem;
+        margin-top: 4px;
+      }
+
+      .social-links {
+        display: flex;
+        margin-top: 2rem;
+        gap: 15px;
+      }
+
+      .social-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 1.5rem;
+      }
+
+      .social-btn.github {
+        background: #333;
+      }
+      .social-btn.linkedin {
+        background: #0077b5;
+      }
+      .social-btn.email {
+        background: #ea4335;
+      }
+
+      .social-btn:hover {
+        transform: translateY(-5px) scale(1.1);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Projects & Skills Section */
+      .projects-section {
+        background: #fff;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .project-card,
+      .skill-card {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+      }
+
+      .project-card:hover,
+      .skill-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .project-title {
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+
+      .project-description {
+        color: #555;
+        margin-bottom: 1.5rem;
+        flex-grow: 1; /* Pushes links to the bottom */
+      }
+
+      .project-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--primary-color);
+        color: white;
+        text-decoration: none;
+        border-radius: 25px;
+        padding: 8px 15px;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        margin-right: 10px;
+      }
+
+      .project-links a:hover {
+        background: var(--secondary-color);
+      }
+
+      .skill-card {
+        text-align: center;
+      }
+
+      .skill-icon {
+        font-size: 3rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+      }
+
+      .skill-card h4 {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+      }
+
+      /* Contact Section */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: start;
+      }
+
+      .contact-form-container,
+      .contact-info-container {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-group {
+        margin-bottom: 1rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-family: inherit;
+        transition: all 0.3s ease;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus {
+        border-color: var(--primary-color);
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+      }
+
+      .btn-submit {
+        width: 100%;
+        padding: 12px;
+        font-size: 1.1rem;
+        border-radius: 8px;
+        gap: 10px;
+      }
+
+      .contact-info-container .info-title {
+        text-align: left;
+      }
+
+      .contact-info-container p {
+        margin-bottom: 1.5rem;
+      }
+
+      /* Footer */
+      .footer {
+        background: var(--dark-color);
+        color: white;
+        text-align: center;
+        padding: 2rem 0;
+      }
+
+      /* Animations */
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+
+      .fade-in.visible {
+        opacity: 1; /* Corrected from 3 to 1 */
+        transform: translateY(0);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 992px) {
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+        .profile-img {
+          width: 180px;
+          height: 180px;
+        }
+        .navbar-nav {
+          display: none;
+          flex-direction: column;
+          position: absolute;
+          top: 70px; /* Adjust based on navbar height */
+          left: 0;
+          width: 100%;
+          background: rgba(0, 4, 40, 0.98);
+          padding: 1rem 0;
+        }
+        .navbar-nav.active {
+          display: flex;
+        }
+        .nav-link {
+          margin: 10px 0;
+          text-align: center;
+        }
+        .navbar-toggler {
+          display: block;
+        }
+        .social-links {
+          justify-content: center;
+        }
+        .bio-info,
+        .contact-info-container,
+        .contact-form-container {
+          text-align: center;
+        }
+        .contact-details li {
+          justify-content: center;
+          text-align: left;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="container navbar-container">
+        <a class="navbar-brand" href="#home">ARAVINTHASAMY C</a>
+        <button
+          class="navbar-toggler"
+          id="navbar-toggler"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="navbar-nav" id="navbarNav">
+          <li><a class="nav-link" href="#home">Home</a></li>
+          <li><a class="nav-link" href="#bio">Bio</a></li>
+          <li><a class="nav-link" href="#projects">Projects</a></li>
+          <li><a class="nav-link" href="#skills">Skills</a></li>
+          <li><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <img
+          src="Aravinthmodify.png"
+          alt="Aravinthasamy C"
+          class="profile-img"
+        />
+        <h1>I'm ARAVINTHASAMY C</h1>
+        <p class="subtitle">
+          MCA Student | Full Stack Developer | Fitness Enthusiast
+        </p>
+        <div class="video-container">
+          <iframe
+            width="100%"
+            height="315"
+            src="https://www.youtube.com/embed/m05_vBw3_y0"
+            title="Video Introduction - Aravinthasamy C"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div class="cta-buttons">
+          <a href="#bio" class="btn btn-primary"
+            ><i class="fas fa-user"></i> About Me</a
+          >
+          <a href="#projects" class="btn btn-outline"
+            ><i class="fas fa-code"></i> My Projects</a
+          >
+          <a href="#" download class="btn btn-outline"
+            ><i class="fas fa-download"></i> My Resume</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Bio Section -->
+    <section id="bio" class="section fade-in">
+      <div class="container">
+        <h2 class="section-title">Bio-Data</h2>
+        <div class="bio-info">
+          <h3 class="info-title">Personal Information</h3>
+          <p>
+            I'm Aravinthasamy C, an MCA student from Tamil Nadu with a strong
+            interest in web development and cloud technologies. I’m passionate
+            about building clean, responsive, and user-focused websites using
+            MERN Stack. I enjoy turning ideas into functional digital
+            experiences that combine design and logic. Currently, I’m exploring
+            AWS to strengthen my backend and cloud skills. My goal is to become
+            a Full Stack Developer who can deliver complete end-to-end web
+            solutions with modern technologies. Outside of coding, I find
+            balance through gym workouts, cricket, music, and traveling—they
+            keep me focused, creative, and motivated.
+          </p>
+          <ul class="contact-details">
+            <li>
+              <i class="fas fa-phone"></i> <strong>Phone:</strong>
+              <span>+91 80989 88252</span>
+            </li>
+            <li>
+              <i class="fas fa-envelope"></i> <strong>Email:</strong>
+              <span>aravinthasamyc@gmail.com</span>
+            </li>
+            <li>
+              <i class="fas fa-map-marker-alt"></i> <strong>Location:</strong>
+              <span>Theni, Tamil Nadu, India</span>
+            </li>
+          </ul>
+          <div class="social-links">
+            <a
+              href="https://github.com/Aravinth-aarav"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-btn github"
+              aria-label="GitHub Profile"
+              ><i class="fab fa-github"></i
+            ></a>
+            <a
+              href="https://www.linkedin.com/in/aravinthasamyc"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-btn linkedin"
+              aria-label="LinkedIn Profile"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+            <a
+              href="mailto:aravinthasamyc@gmail.com"
+              class="social-btn email"
+              aria-label="Send an Email"
+              ><i class="fas fa-envelope"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section fade-in projects-section">
+      <div class="container">
+        <h2 class="section-title">My Projects</h2>
+        <div class="grid-container">
+          <div class="project-card">
+            <h3 class="project-title">
+              <i class="fas fa-shopping-cart"></i> Electronics E-Commerce
+              Website
+            </h3>
+            <p class="project-description">
+              A comprehensive e-commerce platform for electronics with Admin,
+              Seller, and User modules. Built using HTML5, CSS3, and JavaScript
+              with complete functionality for product management, user
+              authentication, and order processing.
+            </p>
+            <div class="project-links">
+              <a
+                href="https://github.com/Aravinth-aarav/E-Commerce-Website"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><i class="fab fa-github"></i> GitHub Repo</a
+              >
+            </div>
+          </div>
+          <div class="project-card">
+            <h3 class="project-title">
+              <i class="fas fa-ghost"></i> PacMen Exercise
+            </h3>
+            <p class="project-description">
+              An interactive web application featuring animated PacMan
+              characters that move across the screen. Built using HTML5, CSS3,
+              and JavaScript with smooth animations and collision detection.
+            </p>
+            <div class="project-links">
+              <a
+                href="https://github.com/Aravinth-aarav/Pacman-Exercise"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><i class="fab fa-github"></i> GitHub Repo</a
+              >
+            </div>
+          </div>
+          <div class="project-card">
+            <h3 class="project-title">
+              <i class="fas fa-ghost"></i> PacMen Exercise
+            </h3>
+            <p class="project-description">
+              An interactive web application featuring animated PacMan
+              characters that move across the screen. Built using HTML5, CSS3,
+              and JavaScript with smooth animations and collision detection.
+            </p>
+            <div class="project-links">
+              <a
+                href="https://github.com/Aravinth-aarav/Pacman-Exercise"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><i class="fab fa-github"></i> GitHub Repo</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section fade-in">
+      <div class="container">
+        <h2 class="section-title">My Skills</h2>
+        <div class="grid-container">
+          <div class="skill-card">
+            <i class="fab fa-html5 skill-icon"></i>
+            <h4>Web Technologies</h4>
+            <p>HTML5, CSS3, JavaScript</p>
+          </div>
+          <div class="skill-card">
+            <i class="fab fa-python skill-icon"></i>
+            <h4>Programming</h4>
+            <p>Python (Basic), Java (Basic)</p>
+          </div>
+          <div class="skill-card">
+            <i class="fab fa-git-alt skill-icon"></i>
+            <h4>Tools & Version Control</h4>
+            <p>Git, GitHub, VS Code</p>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-database skill-icon"></i>
+            <h4>Databases</h4>
+            <p>Basic SQL Knowledge</p>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-users skill-icon"></i>
+            <h4>Team Collaboration</h4>
+            <p>Effective communication</p>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-brain skill-icon"></i>
+            <h4>Problem Solving</h4>
+            <p>Critical and analytical thinking</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section fade-in">
+      <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-grid">
+          <div class="contact-form-container">
+            <h3 class="info-title">Send me a message</h3>
+            <!-- IMPORTANT: Replace YOUR_FORM_ID with your actual Formspree form ID -->
+            <form action="https://formspree.io/f/mvgwqnzw" method="POST">
+              <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="_replyto" required />
+              </div>
+              <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-submit">
+                <i class="fas fa-paper-plane"></i> Send Message
+              </button>
+            </form>
+          </div>
+          <div class="contact-info-container">
+            <h3 class="info-title">Let's Connect!</h3>
+            <p>
+              I’m always open to connecting with like-minded professionals,
+              exploring new opportunities, and collaborating on impactful
+              projects. Feel free to reach out to discuss ideas, internships, or
+              development opportunities.
+            </p>
+            <div class="social-links">
+              <a
+                href="https://github.com/Aravinth-aarav"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-btn github"
+                aria-label="GitHub Profile"
+                ><i class="fab fa-github"></i
+              ></a>
+              <a
+                href="https://linkedin.com/in/aravinthasamy-c"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-btn linkedin"
+                aria-label="LinkedIn Profile"
+                ><i class="fab fa-linkedin"></i
+              ></a>
+              <a
+                href="mailto:aravinthasamyc@gmail.com"
+                class="social-btn email"
+                aria-label="Send an Email"
+                ><i class="fas fa-envelope"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2024 ARAVINTHASAMY C. All rights reserved.</p>
+        <p><small>Built with HTML, CSS & JavaScript</small></p>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const navbar = document.querySelector(".navbar");
+        const navbarToggler = document.getElementById("navbar-toggler");
+        const navbarNav = document.getElementById("navbarNav");
+        const navLinks = document.querySelectorAll(".nav-link");
+        const sections = document.querySelectorAll("section[id]");
+        const fadeElements = document.querySelectorAll(".fade-in");
+        const subtitle = document.querySelector(".hero .subtitle");
+
+        // --- Navbar scroll effect ---
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 50) {
+            navbar.classList.add("scrolled");
+          } else {
+            navbar.classList.remove("scrolled");
+          }
+        });
+
+        // --- Mobile nav toggle ---
+        navbarToggler.addEventListener("click", () => {
+          navbarNav.classList.toggle("active");
+        });
+
+        // --- Close mobile nav on link click ---
+        navLinks.forEach((link) => {
+          link.addEventListener("click", () => {
+            if (navbarNav.classList.contains("active")) {
+              navbarNav.classList.remove("active");
+            }
+          });
+        });
+
+        // --- Active nav link on scroll ---
+        window.addEventListener(
+          "scroll",
+          function () {
+            let current = "";
+            sections.forEach((section) => {
+              const sectionTop = section.offsetTop;
+              if (window.scrollY >= sectionTop - 150) {
+                current = section.getAttribute("id");
+              }
+            });
+
+            navLinks.forEach((link) => {
+              link.classList.remove("active");
+              const href = link.getAttribute("href");
+              if (href && href.includes(current)) {
+                link.classList.add("active");
+              }
+            });
+          },
+          { passive: true }
+        );
+
+        // --- Fade-in animation on scroll ---
+        const observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        fadeElements.forEach((el) => {
+          observer.observe(el);
+        });
+
+        // --- Typing effect for subtitle ---
+        if (subtitle) {
+          const textToType = subtitle.textContent;
+          subtitle.textContent = "";
+          let i = 0;
+
+          function typeWriter() {
+            if (i < textToType.length) {
+              subtitle.textContent += textToType.charAt(i);
+              i++;
+              setTimeout(typeWriter, 100);
+            }
+          }
+          // Start after a delay
+          setTimeout(typeWriter, 1500);
+        }
+      });
+    </script>
+  </body>
+</html>
