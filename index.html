@@ -4,13 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ARAVINTHASAMY C - Portfolio</title>
-    <!-- Font Awesome for icons -->
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
     <style>
-      /* General Styling */
+      /* This section defines reusable colors for the website.
+      Using variables makes it easy to change the color scheme later.
+    */
       :root {
         --primary-color: #007bff;
         --secondary-color: #00d4ff;
@@ -19,49 +21,49 @@
         --text-color: #333;
       }
 
+      /* Universal selector '*' applies these styles to all elements.
+      This is a basic reset to remove default browser margins and paddings.
+      'box-sizing: border-box' makes layout calculations easier.
+    */
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        /* This makes the page jump to sections smoothly when a nav link is clicked. */
         scroll-behavior: smooth;
       }
 
+      /* Basic styling for the entire body of the page */
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         line-height: 1.6;
         color: var(--text-color);
-        overflow-x: hidden;
         background-color: var(--light-color);
       }
 
+      /* A container class to center content and set a maximum width.
+      This helps in making the website look good on large screens.
+    */
       .container {
         max-width: 1140px;
-        margin: 0 auto;
-        padding: 0 20px;
+        margin: 0 auto; /* 'auto' on left/right centers the container */
+        padding: 0 20px; /* 20px space on the left and right */
       }
 
-      /* Navigation Bar */
+      /* --- Navigation Bar Styling --- */
       .navbar {
-        position: fixed;
+        position: fixed; /* Keeps the navbar at the top when scrolling */
         top: 0;
         width: 100%;
         background: rgba(0, 4, 40, 0.9);
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
         padding: 1rem 0;
-        z-index: 1000;
-        transition: all 0.3s ease;
-      }
-
-      .navbar.scrolled {
-        background: rgba(0, 4, 40, 0.98);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000; /* Ensures the navbar is above other content */
       }
 
       .navbar-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        display: flex; /* Arranges items in a row */
+        justify-content: space-between; /* Pushes brand to the left and nav links to the right */
+        align-items: center; /* Vertically aligns items in the center */
         width: 100%;
       }
 
@@ -69,94 +71,63 @@
         font-size: 1.8rem;
         font-weight: bold;
         color: #fff;
-        text-decoration: none;
+        text-decoration: none; /* Removes underline from the link */
       }
 
       .navbar-nav {
-        display: flex;
-        list-style: none;
+        display: flex; /* Arranges nav items in a row */
+        list-style: none; /* Removes bullet points from the list */
       }
 
       .nav-link {
         color: #fff;
-        transition: all 0.3s ease;
-        position: relative;
-        margin: 0 20px;
+        margin: 0 20px; /* Space between nav links */
         text-decoration: none;
         padding: 5px 0;
         font-size: 1.2rem;
         font-weight: 500;
       }
 
-      .nav-link:hover {
-        color: var(--secondary-color);
-      }
-
-      .nav-link::after {
-        content: "";
-        position: absolute;
-        width: 0;
-        height: 2px;
-        bottom: -5px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: linear-gradient(
-          45deg,
-          var(--primary-color),
-          var(--secondary-color)
-        );
-        transition: width 0.3s ease;
-      }
-
-      .nav-link:hover::after,
-      .nav-link.active::after {
-        width: 100%;
-      }
-
+      /* Hamburger menu button - hidden on desktop */
       .navbar-toggler {
         display: none;
         background: none;
         border: none;
         cursor: pointer;
-        padding: 0;
-        z-index: 1001;
       }
 
+      /* The lines of the hamburger icon */
       .navbar-toggler-icon {
         display: block;
         width: 25px;
         height: 3px;
         background-color: white;
         margin: 5px 0;
-        transition: all 0.3s ease;
       }
 
-      /* Hero Section */
+      /* --- Hero (Home) Section Styling --- */
       .hero {
-        min-height: 100vh;
+        min-height: 100vh; /* Makes the section cover the full screen height */
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
         color: white;
-        position: relative;
-        overflow: hidden;
         padding: 100px 0 50px;
       }
 
       .hero-content {
-        z-index: 2;
         max-width: 1000px;
-        padding: 3.5rem;
+        padding: 2rem;
       }
 
       .profile-img {
-        width: 350px;
-        height: 350px;
-        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%; /* Makes the image circular */
         border: 5px solid rgba(255, 255, 255, 0.3);
-        object-fit: cover;
+        object-fit: cover; /* Ensures the image covers the area without distortion */
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         margin-bottom: 1.5rem;
       }
@@ -164,23 +135,33 @@
       .hero h1 {
         font-size: 3rem;
         margin-bottom: 1rem;
-        animation: slideInLeft 1s ease-out;
       }
 
+      .hero .subtitle {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+      }
+
+      /* Corrected Video Container Styling for Responsive IFRAME */
       .video-container {
         margin: 2rem auto;
         border-radius: 15px;
         overflow: hidden;
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         max-width: 800px;
-        width: 90%;
         background-color: #000;
+
+        /* REQUIRED for responsive iframe trick: */
         position: relative;
-        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio (9/16 * 100%) */
         height: 0;
-        transition: all 0.3s ease;
+
+        /* Hiding the video by default as requested */
+        display: none;
       }
 
+      /* Styles for the embedded YouTube iframe */
       .video-container iframe {
         position: absolute;
         top: 0;
@@ -190,40 +171,24 @@
         border: none;
       }
 
-      .video-container:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+      /* Shows the video container when the class is added by JavaScript */
+      .video-container.visible {
+        display: block;
       }
 
-      .video-note {
-        margin-top: 1rem;
-        color: white;
-        padding: 8px;
-        text-align: center;
-        font-size: 0.9rem;
-        opacity: 0.8;
+      /* --- Note: The following video-specific CSS is no longer needed since you are using an iframe ---
+      .video-container video {
+        width: 100%;
+        height: auto;
+        display: block;
       }
-
-      /* Responsive video container for smaller screens */
-      @media (max-width: 768px) {
-        .video-container {
-          width: 95%;
-          margin: 1.5rem auto;
-        }
-      }
-      .hero .subtitle {
-        font-size: 1.3rem;
-        margin-bottom: 2rem;
-        opacity: 0.9;
-        animation: slideInRight 1s ease-out;
-        min-height: 2.6rem; /* Reserve space for typing effect */
-      }
+      */
 
       .cta-buttons {
         display: flex;
         justify-content: center;
-        flex-wrap: wrap;
-        gap: 1rem;
+        flex-wrap: wrap; /* Allows buttons to wrap to the next line on small screens */
+        gap: 1rem; /* Space between buttons */
       }
 
       .btn {
@@ -231,12 +196,12 @@
         border-radius: 50px;
         text-decoration: none;
         font-weight: bold;
-        transition: all 0.3s ease;
         cursor: pointer;
         display: inline-flex;
         align-items: center;
         gap: 8px;
         border: 2px solid transparent;
+        transition: all 0.3s ease; /* Added transition for hover effect */
       }
 
       .btn-primary {
@@ -264,7 +229,7 @@
         transform: translateY(-3px);
       }
 
-      /* General Section Styles */
+      /* --- General Styling for all Sections --- */
       .section {
         padding: 80px 0;
       }
@@ -277,6 +242,7 @@
         position: relative;
       }
 
+      /* The small line under the section title */
       .section-title::after {
         content: "";
         position: absolute;
@@ -289,18 +255,17 @@
         );
         bottom: -15px;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translateX(-50%); /* Centers the line */
         border-radius: 2px;
       }
 
-      /* Bio Section */
+      /* --- Bio Section Styling --- */
       .bio-info {
         background: white;
         padding: 2.5rem;
         border-radius: 15px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         font-size: 1.1rem;
-        text-align: left;
       }
 
       .info-title {
@@ -316,17 +281,15 @@
       }
 
       .contact-details li {
-        display: flex;
-        align-items: flex-start;
         margin-bottom: 1rem;
-        gap: 1rem;
+        display: flex; /* Ensure icons and text align */
+        align-items: baseline;
       }
 
       .contact-details i {
         color: var(--primary-color);
-        width: 20px;
+        margin-right: 1rem; /* Space between icon and text */
         font-size: 1.2rem;
-        margin-top: 4px;
       }
 
       .social-links {
@@ -344,8 +307,13 @@
         border-radius: 50%;
         color: white;
         text-decoration: none;
-        transition: all 0.3s ease;
         font-size: 1.5rem;
+        transition: all 0.3s ease;
+      }
+
+      .social-btn:hover {
+        transform: translateY(-5px) scale(1.1);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
       }
 
       .social-btn.github {
@@ -358,18 +326,15 @@
         background: #ea4335;
       }
 
-      .social-btn:hover {
-        transform: translateY(-5px) scale(1.1);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      }
-
-      /* Projects & Skills Section */
-      .projects-section {
+      /* --- Projects & Skills Section Styling --- */
+      .projects-section,
+      .contact-section {
         background: #fff;
       }
 
       .grid-container {
         display: grid;
+        /* Creates responsive columns. They will be at least 300px wide. */
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 2rem;
       }
@@ -380,10 +345,7 @@
         border-radius: 15px;
         padding: 2rem;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-        display: flex;
-        flex-direction: column;
-        text-align: left;
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition */
       }
 
       .project-card:hover,
@@ -402,7 +364,6 @@
       .project-description {
         color: #555;
         margin-bottom: 1.5rem;
-        flex-grow: 1; /* Pushes links to the bottom */
       }
 
       .project-links a {
@@ -416,7 +377,6 @@
         padding: 8px 15px;
         font-size: 0.9rem;
         transition: all 0.3s ease;
-        margin-right: 10px;
       }
 
       .project-links a:hover {
@@ -438,12 +398,11 @@
         margin-bottom: 0.5rem;
       }
 
-      /* Contact Section */
+      /* --- Contact Section Styling --- */
       .contact-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr; /* Two equal columns */
         gap: 2rem;
-        align-items: start;
       }
 
       .contact-form-container,
@@ -471,7 +430,7 @@
         border: 1px solid #ccc;
         border-radius: 8px;
         font-family: inherit;
-        transition: all 0.3s ease;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
       }
 
       .form-group input:focus,
@@ -486,18 +445,13 @@
         padding: 12px;
         font-size: 1.1rem;
         border-radius: 8px;
-        gap: 10px;
-      }
-
-      .contact-info-container .info-title {
-        text-align: left;
       }
 
       .contact-info-container p {
         margin-bottom: 1.5rem;
       }
 
-      /* Footer */
+      /* --- Footer Styling --- */
       .footer {
         background: var(--dark-color);
         color: white;
@@ -505,95 +459,63 @@
         padding: 2rem 0;
       }
 
-      /* Animations */
-      @keyframes slideInLeft {
-        from {
-          opacity: 0;
-          transform: translateX(-50px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-
-      @keyframes slideInRight {
-        from {
-          opacity: 0;
-          transform: translateX(50px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-
-      .fade-in {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-      }
-
-      .fade-in.visible {
-        opacity: 1; /* Corrected from 3 to 1 */
-        transform: translateY(0);
-      }
-
-      /* Responsive Design */
+      /* --- Responsive Design using Media Queries --- 
+      These styles will apply only when the screen width is 992px or less.
+    */
       @media (max-width: 992px) {
         .contact-grid {
-          grid-template-columns: 1fr;
+          grid-template-columns: 1fr; /* Stacks the contact form and info vertically */
         }
       }
 
+      /* These styles will apply only when the screen width is 768px or less (for mobile phones) */
       @media (max-width: 768px) {
-        .hero h1 {
-          font-size: 2.5rem;
-        }
         .profile-img {
           width: 180px;
           height: 180px;
         }
+        .hero h1 {
+          font-size: 2.5rem;
+        }
         .navbar-nav {
-          display: none;
-          flex-direction: column;
+          display: none; /* Hide the nav links by default */
+          flex-direction: column; /* Stack the nav links vertically */
           position: absolute;
-          top: 70px; /* Adjust based on navbar height */
+          top: 75px; /* Position below the navbar */
           left: 0;
           width: 100%;
           background: rgba(0, 4, 40, 0.98);
           padding: 1rem 0;
         }
+
+        /* This class will be added by JavaScript to show the menu */
         .navbar-nav.active {
           display: flex;
         }
+
         .nav-link {
           margin: 10px 0;
           text-align: center;
         }
+
+        /* Show the hamburger button on mobile */
         .navbar-toggler {
           display: block;
         }
+
+        /* Center social links on mobile */
         .social-links {
           justify-content: center;
-        }
-        .bio-info,
-        .contact-info-container,
-        .contact-form-container {
-          text-align: center;
-        }
-        .contact-details li {
-          justify-content: center;
-          text-align: left;
         }
       }
     </style>
   </head>
+
   <body>
-    <!-- Navigation Bar -->
     <nav class="navbar">
       <div class="container navbar-container">
         <a class="navbar-brand" href="#home">ARAVINTHASAMY C</a>
+
         <button
           class="navbar-toggler"
           id="navbar-toggler"
@@ -603,6 +525,7 @@
           <span class="navbar-toggler-icon"></span>
           <span class="navbar-toggler-icon"></span>
         </button>
+
         <ul class="navbar-nav" id="navbarNav">
           <li><a class="nav-link" href="#home">Home</a></li>
           <li><a class="nav-link" href="#bio">Bio</a></li>
@@ -613,7 +536,6 @@
       </div>
     </nav>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
       <div class="hero-content">
         <img
@@ -621,65 +543,65 @@
           alt="Aravinthasamy C"
           class="profile-img"
         />
+
         <h1>I'm ARAVINTHASAMY C</h1>
+
         <p class="subtitle">
           MCA Student | Full Stack Developer | Fitness Enthusiast
         </p>
-        <div class="video-container">
+
+        <div class="video-container" id="video-container-target">
           <iframe
+            id="intro-video"
             width="100%"
-            height="315"
-            src="https://www.youtube.com/embed/m05_vBw3_y0"
+            height="100%"
+            src="https://www.youtube.com/embed/m05_vBw3_y0?autoplay=1"
             title="Video Introduction - Aravinthasamy C"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
           ></iframe>
         </div>
+
         <div class="cta-buttons">
-          <a href="#bio" class="btn btn-primary"
-            ><i class="fas fa-user"></i> About Me</a
+          <a
+            href="#video-container-target"
+            id="play-intro-btn"
+            class="btn btn-primary"
           >
-          <a href="#projects" class="btn btn-outline"
-            ><i class="fas fa-code"></i> My Projects</a
-          >
-          <a href="#" download class="btn btn-outline"
-            ><i class="fas fa-download"></i> My Resume</a
-          >
+            <i class="fas fa-video"></i> Watch My Intro Video
+          </a>
+          <a href="#projects" class="btn btn-outline">
+            <i class="fas fa-code"></i> My Projects
+          </a>
+          <a href="Aravinthasamy_Resume.pdf" download class="btn btn-outline">
+            <i class="fas fa-download"></i> My Resume
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- Bio Section -->
-    <section id="bio" class="section fade-in">
+    <section id="bio" class="section">
       <div class="container">
         <h2 class="section-title">Bio-Data</h2>
         <div class="bio-info">
           <h3 class="info-title">Personal Information</h3>
           <p>
-            I'm Aravinthasamy C, an MCA student from Tamil Nadu with a strong
-            interest in web development and cloud technologies. I’m passionate
-            about building clean, responsive, and user-focused websites using
-            MERN Stack. I enjoy turning ideas into functional digital
-            experiences that combine design and logic. Currently, I’m exploring
-            AWS to strengthen my backend and cloud skills. My goal is to become
-            a Full Stack Developer who can deliver complete end-to-end web
-            solutions with modern technologies. Outside of coding, I find
-            balance through gym workouts, cricket, music, and traveling—they
-            keep me focused, creative, and motivated.
+            I’m Aravinthasamy C, pursuing my Master of Computer Applications
+            (MCA). I’m passionate about web development and cloud technologies.
+            I’ve completed the basics of Cloud Computing and also finished a
+            Prompt Engineering course, which helped me understand how to use AI
+            tools effectively for development and creativity. My goal is to
+            become a skilled MERN Full Stack Developer with strong knowledge in
+            both development and AI integration. Outside academics, I love gym
+            workouts, cricket, traveling, and music, which keep me motivated and
+            focused.
           </p>
           <ul class="contact-details">
+            <li><i class="fas fa-phone"></i>+91 80989 88252</li>
+            <li><i class="fas fa-envelope"></i>aravinthasamyc@gmail.com</li>
             <li>
-              <i class="fas fa-phone"></i> <strong>Phone:</strong>
-              <span>+91 80989 88252</span>
-            </li>
-            <li>
-              <i class="fas fa-envelope"></i> <strong>Email:</strong>
-              <span>aravinthasamyc@gmail.com</span>
-            </li>
-            <li>
-              <i class="fas fa-map-marker-alt"></i> <strong>Location:</strong>
-              <span>Theni, Tamil Nadu, India</span>
+              <i class="fas fa-map-marker-alt"></i>Theni, Tamil Nadu, India
             </li>
           </ul>
           <div class="social-links">
@@ -710,29 +632,26 @@
       </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="section fade-in projects-section">
+    <section id="projects" class="section projects-section">
       <div class="container">
         <h2 class="section-title">My Projects</h2>
         <div class="grid-container">
           <div class="project-card">
             <h3 class="project-title">
-              <i class="fas fa-shopping-cart"></i> Electronics E-Commerce
-              Website
+              <i class="fas fa-shopping-cart"></i> E-Commerce Website
             </h3>
             <p class="project-description">
               A comprehensive e-commerce platform for electronics with Admin,
-              Seller, and User modules. Built using HTML5, CSS3, and JavaScript
-              with complete functionality for product management, user
-              authentication, and order processing.
+              Seller, and User modules.
             </p>
             <div class="project-links">
               <a
-                href="https://github.com/Aravinth-aarav/E-Commerce-Website"
+                href="https://aravinth-aarav.github.io/E-Commerce-Electronics-Website/"
                 target="_blank"
                 rel="noopener noreferrer"
-                ><i class="fab fa-github"></i> GitHub Repo</a
               >
+                <i class="fab fa-github"></i> Live Demo
+              </a>
             </div>
           </div>
           <div class="project-card">
@@ -741,42 +660,41 @@
             </h3>
             <p class="project-description">
               An interactive web application featuring animated PacMan
-              characters that move across the screen. Built using HTML5, CSS3,
-              and JavaScript with smooth animations and collision detection.
+              characters that move across the screen.
             </p>
             <div class="project-links">
               <a
-                href="https://github.com/Aravinth-aarav/Pacman-Exercise"
+                href="https://aravinth-aarav.github.io/Pacman-/"
                 target="_blank"
                 rel="noopener noreferrer"
-                ><i class="fab fa-github"></i> GitHub Repo</a
               >
+                <i class="fab fa-github"></i> Live Demo
+              </a>
             </div>
           </div>
           <div class="project-card">
             <h3 class="project-title">
-              <i class="fas fa-ghost"></i> PacMen Exercise
+              <i class="fas fa-id-card"></i> Personal Portfolio
             </h3>
             <p class="project-description">
-              An interactive web application featuring animated PacMan
-              characters that move across the screen. Built using HTML5, CSS3,
-              and JavaScript with smooth animations and collision detection.
+              A responsive personal portfolio website built to showcase my
+              skills, projects, and professional journey.
             </p>
             <div class="project-links">
               <a
-                href="https://github.com/Aravinth-aarav/Pacman-Exercise"
+                href="http://aravinth-aarav.github.io/PortFolio-/"
                 target="_blank"
                 rel="noopener noreferrer"
-                ><i class="fab fa-github"></i> GitHub Repo</a
               >
+                <i class="fab fa-github"></i> Live Demo
+              </a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="section fade-in">
+    <section id="skills" class="section">
       <div class="container">
         <h2 class="section-title">My Skills</h2>
         <div class="grid-container">
@@ -814,14 +732,12 @@
       </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section fade-in">
+    <section id="contact" class="section contact-section">
       <div class="container">
         <h2 class="section-title">Get In Touch</h2>
         <div class="contact-grid">
           <div class="contact-form-container">
             <h3 class="info-title">Send me a message</h3>
-            <!-- IMPORTANT: Replace YOUR_FORM_ID with your actual Formspree form ID -->
             <form action="https://formspree.io/f/mvgwqnzw" method="POST">
               <div class="form-group">
                 <label for="name">Your Name</label>
@@ -848,10 +764,8 @@
           <div class="contact-info-container">
             <h3 class="info-title">Let's Connect!</h3>
             <p>
-              I’m always open to connecting with like-minded professionals,
-              exploring new opportunities, and collaborating on impactful
-              projects. Feel free to reach out to discuss ideas, internships, or
-              development opportunities.
+              I’m always open to connecting with like-minded professionals and
+              exploring new opportunities.
             </p>
             <div class="social-links">
               <a
@@ -882,7 +796,6 @@
       </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
       <div class="container">
         <p>&copy; 2024 ARAVINTHASAMY C. All rights reserved.</p>
@@ -891,30 +804,27 @@
     </footer>
 
     <script>
+      // This code will run after the whole HTML page has loaded.
       document.addEventListener("DOMContentLoaded", function () {
-        const navbar = document.querySelector(".navbar");
+        // Get the hamburger button element by its ID.
         const navbarToggler = document.getElementById("navbar-toggler");
+        // Get the navigation links list element by its ID.
         const navbarNav = document.getElementById("navbarNav");
-        const navLinks = document.querySelectorAll(".nav-link");
-        const sections = document.querySelectorAll("section[id]");
-        const fadeElements = document.querySelectorAll(".fade-in");
-        const subtitle = document.querySelector(".hero .subtitle");
-
-        // --- Navbar scroll effect ---
-        window.addEventListener("scroll", function () {
-          if (window.scrollY > 50) {
-            navbar.classList.add("scrolled");
-          } else {
-            navbar.classList.remove("scrolled");
-          }
-        });
+        // Get the new button, video element, and video container
+        const playIntroBtn = document.getElementById("play-intro-btn");
+        const videoContainer = document.getElementById(
+          "video-container-target"
+        );
+        // We get the iframe element directly, but since we rely on the iframe's 'src' change for autoplay,
+        // we mainly focus on the container visibility and scrolling.
 
         // --- Mobile nav toggle ---
-        navbarToggler.addEventListener("click", () => {
+        navbarToggler.addEventListener("click", function () {
           navbarNav.classList.toggle("active");
         });
 
         // --- Close mobile nav on link click ---
+        const navLinks = document.querySelectorAll(".nav-link");
         navLinks.forEach((link) => {
           link.addEventListener("click", () => {
             if (navbarNav.classList.contains("active")) {
@@ -923,63 +833,27 @@
           });
         });
 
-        // --- Active nav link on scroll ---
-        window.addEventListener(
-          "scroll",
-          function () {
-            let current = "";
-            sections.forEach((section) => {
-              const sectionTop = section.offsetTop;
-              if (window.scrollY >= sectionTop - 150) {
-                current = section.getAttribute("id");
-              }
+        // --- Video Show and Play Functionality ---
+        if (playIntroBtn && videoContainer) {
+          playIntroBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            // 1. Show the video container
+            videoContainer.classList.add("visible");
+
+            // 2. Scroll smoothly to the video container
+            videoContainer.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
             });
 
-            navLinks.forEach((link) => {
-              link.classList.remove("active");
-              const href = link.getAttribute("href");
-              if (href && href.includes(current)) {
-                link.classList.add("active");
-              }
-            });
-          },
-          { passive: true }
-        );
-
-        // --- Fade-in animation on scroll ---
-        const observer = new IntersectionObserver(
-          function (entries) {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.1 }
-        );
-
-        fadeElements.forEach((el) => {
-          observer.observe(el);
-        });
-
-        // --- Typing effect for subtitle ---
-        if (subtitle) {
-          const textToType = subtitle.textContent;
-          subtitle.textContent = "";
-          let i = 0;
-
-          function typeWriter() {
-            if (i < textToType.length) {
-              subtitle.textContent += textToType.charAt(i);
-              i++;
-              setTimeout(typeWriter, 100);
-            }
-          }
-          // Start after a delay
-          setTimeout(typeWriter, 1500);
+            // 3. Since this is an IFRAME, we don't use .play().
+            // Instead, we ensure the 'autoplay=1' parameter is in the iframe's src
+            // to start playback immediately upon being shown. The HTML has been updated for this.
+          });
         }
       });
     </script>
   </body>
 </html>
+```eof
